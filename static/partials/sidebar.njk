@@ -1,0 +1,23 @@
+<aside class="sidebar">
+  <div class="sidebar__widget">
+    <div class="sidebar__title">Recherche</div>
+    <form action="#" class="form-group form-search">
+      <input type="search" placeholder="Rechercher une actualité">
+      <button type="submit">
+        <svg class="icon">
+          <use xlink:href="images/sprite.svg#search"></use>
+        </svg>
+      </button>
+    </form>
+  </div>
+  {% for i in range(0, 2) %}
+    <div class="sidebar__widget">
+      <h4 class="sidebar__title">Dernières actualités</h4>
+      <ul class="sidebar__list">
+        {% for i in range(1, 5) %}
+          <li><a href="single.njk">Maison 4 pièce(s) - {{ i }}0m²</a></li>
+        {% endfor %}
+      </ul>
+    </div>
+  {% endfor %}
+</aside>

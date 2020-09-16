@@ -1,0 +1,14 @@
+<a class="property {{ propertyClass }}" href="single.njk" title="Maison 4 pièce(s) - {{ i }}0m²">
+  <div class="property__image">
+    {% if propertyClass === 'property--large' %}
+      <img src="https://i.picsum.photos/id/3{{ i }}/802/220.jpg" alt="">
+    {% else %}
+      <img src="https://i.picsum.photos/id/3{{ i }}/385/220.jpg" alt="">
+    {% endif %}
+  </div>
+  <div class="property__body">
+    <div class="property__location">34000 Montpellier</div>
+    <h3 class="property__title">Maison 4 pièce(s) - {{ i + 1 }}0m²</h3>
+    <div class="property__price">45 000 €</div>
+  </div>
+</a>

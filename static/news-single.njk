@@ -1,0 +1,75 @@
+{% set bodyClass = 'single' %}
+
+{% extends 'default.njk' %}
+
+{% block body %}
+
+  <div class="container page-sidebar">
+    <main>
+      <header class="news-single__header">
+        <div class="news-single__title">Article de démonstration</div>
+        <div class="news-single__meta">
+          <a class="news__tag" href="news.njk">Bons plans</a>
+          <div class="news__date">Publié le 12/0{{ i }}/2020</div>
+        </div>
+      </header>
+      <div class="formatted">
+        <p>
+          <img src="https://i.picsum.photos/id/234/950/530.jpg" alt="">
+        </p>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ea esse odit optio! At dolor, doloremque ducimus,
+          earum et ex incidunt, ipsam maxime nemo numquam quam repellendus soluta unde voluptate voluptatibus!</p>
+        <p>Adipisci asperiores consectetur dicta dolores fuga impedit non optio perspiciatis ullam veniam! Aliquid
+          dolorem ducimus ex laborum odit quae temporibus voluptatem. At dolorem excepturi hic omnis placeat soluta,
+          tempora ullam?</p>
+        <h2>Titre de second niveau</h2>
+        <p>Ab alias animi aperiam cum dicta dolorem dolorum earum ex fuga incidunt iste laboriosam libero magnam,
+          mollitia nihil officia officiis perspiciatis quam quas quia ratione repellat tenetur totam ut
+          voluptatibus.</p>
+        <p>Accusamus aspernatur beatae dolorem earum, eligendi, est eum expedita facere fugiat impedit in labore
+          laboriosam laborum, neque numquam porro possimus quia quod reiciendis repellat repellendus sint tenetur ut
+          vitae voluptate?</p>
+        <h3>Titre de troisième niveau</h3>
+        <p>Accusantium, dignissimos, distinctio ducimus esse expedita molestiae mollitia nisi obcaecati optio, quas quia
+          rem ullam. Ab ad adipisci autem cupiditate eius eum, voluptates? Aut dolores mollitia quisquam, sed sunt
+          ut!</p>
+        <ul>
+          <li>Lorem ipsum dolor sit amet, consectetur adipisicing elit. At consequatur consequuntur cum dolores eaque
+          </li>
+          <li>Architecto at dolores nihil non quod? Ad architecto, aspernatur at cupiditate distinctio dolor dolorem
+          </li>
+          <li>A at corporis cumque dignissimos, distinctio eaque eligendi enim exercitationem explicabo illum labore
+          </li>
+          <li>Ad asperiores cumque esse et molestiae natus nemo quaerat sint tempora ullam. Dolore id quae similique
+          </li>
+          <li>Consequuntur corporis eligendi enim iusto officiis perferendis quasi qui quod suscipit voluptatem.
+          </li>
+        </ul>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium, aliquid, at atque, consequatur
+          consequuntur culpa est eveniet fugit illum ipsum magni nesciunt nobis non officia quam quasi quia quod
+          saepe.</p>
+        <p>A alias aliquam id totam ut. Autem consectetur, dolore facilis id ipsa vel. At blanditiis, eligendi esse illo
+          ipsa ipsam itaque maxime nam nemo nesciunt nihil nobis, porro, sit voluptatum?</p>
+        <blockquote class="wp-block-quote"><p>«&nbsp;Soyez vous-même, les autres sont déjà pris.&nbsp;» </p><cite>— Oscar Wilde.</cite></blockquote>
+
+        <ol>
+          <li>Lorem ipsum dolor sit amet, consectetur adipisicing elit. At consequatur consequuntur cum dolores eaque
+          </li>
+          <li>Architecto at dolores nihil non quod? Ad architecto, aspernatur at cupiditate distinctio dolor dolorem
+          </li>
+          <li>A at corporis cumque dignissimos, distinctio eaque eligendi enim exercitationem explicabo illum labore
+          </li>
+          <li>Ad asperiores cumque esse et molestiae natus nemo quaerat sint tempora ullam. Dolore id quae similique
+          </li>
+          <li>Consequuntur corporis eligendi enim iusto officiis perferendis quasi qui quod suscipit voluptatem.
+          </li>
+        </ol>
+      </div>
+
+      {% include 'partials/comments.njk' %}
+
+    </main>
+    {% include 'partials/sidebar.njk' %}
+  </div>
+
+{% endblock %}

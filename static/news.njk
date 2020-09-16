@@ -1,0 +1,63 @@
+{% set bodyClass = 'single' %}
+
+{% extends 'default.njk' %}
+
+{% block body %}
+
+  <div class="container">
+
+    <h1 class="page-title">Actualités</h1>
+
+    <div class="page-sidebar">
+      <div>
+        <div class="news-list">
+          {% for i in range(0, 5) %}
+            <article class="news">
+              <a href="news-single.njk" title="Titre de la news {{ i }}" class="news__image">
+                <img src="https://i.picsum.photos/id/234/250/250.jpg" alt="">
+              </a>
+              <div class="news__body">
+                <header class="news__header">
+                  <a class="news__tag" href="news.njk">Bons plans</a>
+                  <a class="news__title" href="news-single.njk">Titre de la news {{ i }}</a>
+                  <div class="news__date">Publié le 12/0{{ i }}/2020</div>
+                </header>
+                <p class="news__content">
+                  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium aut beatae eaque minima odit
+                  optio sapiente. Dolore dolorem dolores explicabo facere impedit, ipsam magnam, nemo nostrum quo
+                  reprehenderit veniam voluptate.
+                </p>
+                <a href="news-single.njk" class="news__action">
+                  Lire la suite
+                  <svg class="icon">
+                    <use xlink:href="images/sprite.svg#arrow"></use>
+                  </svg>
+                </a>
+              </div>
+            </article>
+          {% endfor %}
+
+          <div class="pagination">
+            <a href="news.njk" class="page-numbers prev">
+              <svg class="icon">
+                <use xlink:href="images/sprite.svg#arrow"></use>
+              </svg>
+            </a>
+            <a href="news.njk" class="page-numbers">1</a>
+            <a href="news.njk" class="page-numbers">2</a>
+            <a href="news.njk" class="page-numbers">3</a>
+            <span class="page-numbers current" aria-current="page">4</span>
+            <a href="news.njk" class="page-numbers">5</a>
+            <a href="news.njk" class="page-numbers next">
+              <svg class="icon">
+                <use xlink:href="images/sprite.svg#arrow"></use>
+              </svg>
+            </a>
+          </div>
+        </div>
+      </div>
+      {% include 'partials/sidebar.njk' %}
+    </div>
+  </div>
+
+{% endblock %}

@@ -1,0 +1,237 @@
+// Push biens
+// ==================
+.push-properties {
+  position: relative;
+}
+.push-properties__title {
+  @extend %big-title;
+  margin-bottom: space(3);
+}
+.push-properties__grid {
+  display: grid;
+  grid-gap: space(4);
+  margin-top: 45px;
+
+  @include up(620) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+.push-properties .highlighted,
+.push-properties__action {
+  margin-top: space(4);
+}
+@include up(1120) {
+  .push-properties {
+    padding-left: 520px;
+  }
+  .push-properties .highlighted {
+    margin-top: 0;
+    width: 506px;
+    position: absolute;
+    top: 102px;
+    left: calc(50% - 50vw);
+    border-radius: 0px 60px 4px 0px;
+    height: calc(100% - 258px);
+    max-height: 600px;
+
+    @include up(1600) {
+      left: calc(50% - 800px);
+      border-radius: 4px 60px 4px 4px;
+    }
+  }
+  .push-properties__action {
+    position: absolute;
+    bottom: 54px;
+    left: 83px;
+  }
+  .push-properties .highlighted img {
+    height: 100%;
+  }
+}
+
+// Biens
+// ==================
+.property {
+  font-size: 18px;
+}
+.property__image {
+  margin-bottom: space(2);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 4px;
+  overflow: hidden;
+}
+.property img {
+  width: 100%;
+  height: auto;
+  display: block;
+  transition: .5s;
+  border-radius: 4px;
+}
+a.property:hover img {
+  opacity: 0.8;
+  transform: scale(1.02);
+}
+.property__body {
+  display: grid;
+  grid-column-gap: space(2);
+  grid-template-columns: repeat(2, auto);
+}
+.property__location {
+  grid-column: 1 / span 2;
+  font-weight: 300;
+  font-size: 16px;
+}
+.property__title {
+  font-weight: 600;
+
+  a.property:hover & {
+    text-decoration: underline;
+  }
+}
+.property__price {
+  text-align: right;
+  font-weight: 600;
+  color: $orange;
+}
+
+// Bien mis en avant
+// ==================
+.highlighted {
+  overflow: hidden;
+  color: #FFf;
+  position: relative;
+  font-size: 16px;
+
+  @include up(600) {
+    font-size: 18px;
+  }
+
+  @include up(1200) {
+    font-size: 20px;
+  }
+}
+.highlighted::after {
+  content:'';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 64.56%, #000000 100%);
+}
+.highlighted img {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+.highlighted__body {
+  position: absolute;
+  width: 100%;
+  bottom: 0;
+  z-index: 2;
+  left: 0;
+  grid-gap: 8px;
+  display: grid;
+  padding: space(2);
+}
+.highlighted__title,
+.highlighted__price {
+  font-family: $f-gotham;
+  font-weight: bold;
+  font-size: 1.4em;
+  line-height: 1.14;
+}
+.highlighted__location,
+.highlighted__space {
+  font-weight: 300;
+  line-height: 1.6;
+}
+.highlighted__space::before {
+  content: '-    '
+}
+@include up(1000) {
+  .highlighted--home {
+    position: absolute;
+    top: 0;
+    right: 0;
+    border-radius: 0px 0px 0px 60px;
+    overflow: hidden;
+    width: 49%;
+    max-width: 790px;
+  }
+  .highlighted--home img {
+    height: 728px;
+    object-fit: cover;
+  }
+  .highlighted__body {
+    grid-template-columns: repeat(2, auto);
+    padding: space(4) space(8);
+  }
+  .highlighted__price,
+  .highlighted__space {
+    text-align: right;
+  }
+  .highlighted__space::before {
+    display: none;
+  }
+}
+@include up(1600) {
+  .highlighted--home {
+    left: 50%;
+    right: auto;
+    border-radius: 0px 0px 60px 60px;
+  }
+}
+
+// Page listing
+// ==================
+.page-properties {
+  display: grid;
+  grid-auto-flow: dense;
+  grid-gap: 32px;
+  grid-template-columns: 1fr;
+}
+@include down(830) {
+  .page-properties .search-form__title {
+    font-size: 49px;
+  }
+}
+@include up(650) {
+  .property--large {
+    grid-column: span 2;
+  }
+}
+@include between(650, 1080) {
+  .page-properties {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .page-properties .search-form {
+    grid-row: 1 / span 3;
+  }
+  .page-properties .search-form__form {
+    grid-template-columns: 1fr;
+  }
+  .page-properties .search-form__checkbox,
+  .page-properties .search-form .btn  {
+    grid-column: span 1;
+  }
+}
+@include up(1080) {
+  .page-properties {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .page-properties .search-form {
+    grid-column: 1 / span 2;
+    grid-row: 1 / span 2;
+    margin-right: 123px;
+  }
+}
+
+// Pagination
+// ==================
+.pagination {
+  margin-top: space(8);
+  text-align: center;
+}

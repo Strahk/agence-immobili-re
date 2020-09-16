@@ -1,0 +1,16 @@
+{
+  "name": "Agencia",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:Grafikart/TP-Agencia.git",
+  "author": "Jonathan Boyer <boyer.jonathan@gmail.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "localtunnel": "^2.0.0",
+    "nunjucks": "^3.2.0",
+    "parcel-bundler": "^1.12.4",
+    "parcel-plugin-nunjucks": "^2.2.0",
+    "sass": "^1.26.2"
+  },
+  "dependencies": {}
+}

@@ -1,0 +1,48 @@
+// Variables
+// ==================
+$orange: #FE6748;
+
+// Generic
+// ==================
+@import "tools/reset";
+@import "tools/mixins";
+@import "modules/typography";
+
+body{
+  font-size: 22px;
+  font-family: $f-sf;
+  color: #2C2E36;
+  line-height: 1.4;
+}
+
+.container,
+%container {
+  max-width: 1370px;
+  padding-left: 20px;
+  padding-right: 20px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+// Libs
+// ==========================================================================
+@import "modules/carousel";
+
+// Imports
+// ==================
+@import "layout/spacing.scss";
+@import "layout/nav.scss";
+@import "layout/home.scss";
+@import "layout/forms.scss";
+@import "layout/btn.scss";
+@import "layout/property.scss";
+@import "layout/news.scss";
+@import "layout/footer.scss";
+@import "layout/newsletter.scss";
+@import "layout/quote.scss";
+@import "layout/single.scss";
+@import "layout/page.scss";
+@import "layout/sidebar.scss";
+@import "layout/pagination.scss";
+@import "layout/comments.scss";
+

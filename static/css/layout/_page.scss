@@ -1,0 +1,15 @@
+.page-title {
+  @extend %big-title;
+  margin-bottom: space(6);
+}
+.page-sidebar {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-gap: space(10);
+  align-items: flex-start;
+}
+@include up(1030) {
+  .page-sidebar {
+    grid-template-columns: 1fr 300px;
+  }
+}

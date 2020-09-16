@@ -1,0 +1,116 @@
+.quote {
+  max-width: 1260px;
+  position: relative;
+}
+.quote__title {
+  @extend %big-title;
+  position: relative;
+  left: 5.3%;
+  max-width: 480px;
+  margin-bottom: space(3);
+}
+.quote__body {
+  display: flex;
+  align-items: center;
+}
+.quote__body img {
+  width: 424px;
+  flex-grow: 0;
+}
+.quote__body blockquote {
+  width: 100%;
+}
+.quote__body::after {
+  content:'';
+  position: absolute;
+  width: 534px;
+  z-index: -1;
+  background: #FFDA7D;
+  border-radius: 8px;
+}
+.quote blockquote {
+  position: relative;
+  font-size: 35px;
+  line-height: 1.4;
+  margin: 50px 0 150px 0;
+
+  @include up(950) {
+    font-size: 48px;
+  }
+
+  p::before,
+  p::after {
+    content:'“'
+  }
+}
+.quote__image {
+  width: 33%;
+  flex: none;
+  position: relative;
+  align-self: flex-end;
+}
+.quote__image img {
+  display: block;
+}
+.quote__image::before {
+  content:'';
+  position: absolute;
+  bottom: 0;
+  left: 15%;
+  width: 126%;
+  height: 115%;
+  background-color: #FFDA7D;
+  border-top-left-radius: 60px;
+  z-index: -1;
+}
+.quote__author {
+  position: absolute;
+  left: 85%;
+  white-space: nowrap;
+  bottom: 32px;
+  font-weight: bold;
+  font-size: 16px;
+  line-height: 32px;
+  align-items: center;
+  color: $orange;
+  padding: 0 10px;
+  display: inline-block;
+  background: rgba(#FE6748, 0.1);
+  border-radius: 4px;
+}
+.quote__action {
+  position: absolute;
+  bottom: 15px;
+  right: 7.9%;
+}
+
+@include down(760) {
+  .quote__title {
+    left: 0;
+  }
+  .quote__image {
+    width: 0;
+    align-self: stretch;
+  }
+  .quote__image img {
+    display: none;
+  }
+  .quote__image::before {
+    height: 100%;
+    width: 45vw;
+    bottom: 0;
+    left: -20px;
+    border-radius: 0 60px 60px 0;
+  }
+  .quote blockquote {
+    margin: 35px 0 100px 0;
+  }
+  .quote__action {
+    margin-top: space(3);
+  }
+}
+@include down(600) {
+  .quote__action {
+    position: static;
+  }
+}

@@ -1,0 +1,21 @@
+{% extends 'default.njk' %}
+
+{% block body %}
+
+  <div class="container page-properties">
+    {% include 'partials/search.njk' %}
+    {% for i in range(0, 19) %}
+      {% if i === 7 %}
+        {% set propertyClass = 'property--large' %}
+      {% else %}
+        {% set propertyClass = '' %}
+      {% endif %}
+      {% include 'partials/property.njk' %}
+    {% endfor %}
+  </div>
+
+  <div class="pagination">
+    <a href="#" class="btn">Voir plus de biens +</a>
+  </div>
+
+{% endblock %}
