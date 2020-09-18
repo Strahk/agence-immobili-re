@@ -23,7 +23,7 @@ class Agencia_Social_Widget extends WP_Widget
             $title = apply_filters('widget_title', $instance['title']);
             echo $args['before_title'] . $title . $args['after_title'];
         }
-        $template = locate_template('widgets/social.php');
+        $template = locate_template('template-parts/widgets/social.php');
         if (!empty($template)) {
             include($template);
         }
