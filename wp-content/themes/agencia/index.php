@@ -4,7 +4,7 @@
 
     <h1 class="page-title">
         <?php if (is_category()): ?>
-            <?php single_cat_title() ?>0
+            <?php single_cat_title() ?>
             <?php elseif (is_search()): ?>
                 <?= sprintf(__('Search results for "%s"', 'agencia'), get_search_query()); ?>
             <?php else :?>
