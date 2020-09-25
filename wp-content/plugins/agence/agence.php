@@ -2,7 +2,17 @@
 
 /**
  * Plugin Name: Agence Plugin
- */
+ * Text Domain: agence
+ * Domain Path: /languages
+ */ 
+defined('ABSPATH') or die('rien à voir');
+
+// Loading the translation file
+
+add_action('plugins_loaded', function () {
+    load_plugin_textdomain('agence', false, basename(dirname(__FILE__)) . '/languages');
+});
+
 add_action('init', function () {
     register_post_type('property', [
         'label' => __('Property', 'agence'),
@@ -31,9 +41,13 @@ add_action('init', function () {
             'item_scheduled'           => __('Property scheduled.', 'agence'),
             'item_updated'             => __('Property updated.', 'agence'),
         ],
+        'has_archive' => true,
         'public' => true,
         'hierarchical' => false,
         'exclude_from_search' => false,
+        'rewrite' => [
+            'slug' => _x('property', 'URL', 'agence')
+        ],
         'taxonomies' => ['property_type', 'property_city', 'property_option'],
         'supports' => ['title', 'editor', 'excerpt', 'thumbnail']
     ]);
@@ -63,7 +77,7 @@ add_action('init', function () {
     register_taxonomy('property_city', 'property', [
 
         /* meta_box: checkbox for taxonomy for admin */
-        
+
         'meta_box_cb' => 'post_categories_meta_box',
         'labels' => [
             'name'                       => __('Cities', 'agence'),
@@ -113,12 +127,15 @@ add_action('init', function () {
 register_activation_hook(__FILE__, 'flush_rewrite_rules');
 register_deactivation_hook(__FILE__, 'flush_rewrite_rules');
 
+require_once('query.php');
+
 /**
  * Show city en postal code associated to this content 
  * 
  * @param WP_post|int|null $post
  */
-function agence_city ($post = null): void {
+function agence_city($post = null): void
+{
     if ($post === null) {
         $post = get_post();
     }
@@ -133,3 +150,12 @@ function agence_city ($post = null): void {
         echo ' (' . $postalCode . ')';
     }
 }
+
+function agence_price($post = null): void
+{
+    if (get_field('property_category', $post) === 'buy') {
+        echo sprintf(__('%s $', 'agence'), get_field('price'));
+    } else {
+        echo sprintf(__('%s $/mo', 'agence'), get_field('price'));
+    }
+};

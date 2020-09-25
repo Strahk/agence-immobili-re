@@ -9,11 +9,7 @@
                 <div class="bien__meta">
                     <div class="bien__location"><?= agence_city(get_post()) ?></div>
                     <div class="bien__price">
-                        <?php if (get_field('property_category') === 'buy') : ?>
-                            <?= sprintf('%s $', get_field('price')); ?>
-                        <?php else : ?>
-                            <?= sprintf('%s $/mo', get_field('price')); ?>
-                        <?php endif ?>
+                        <?php agence_price() ?>
                     </div>
                 </div>
                 <div class="bien__actions">
