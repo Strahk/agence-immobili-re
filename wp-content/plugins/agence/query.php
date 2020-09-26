@@ -39,3 +39,32 @@ add_action('init', function () use (&$propertiesCategories) {
         'top',
     );
 });
+
+// Menu current page 
+
+add_filter('nav_menu_css_class', function (array $classes, WP_Post $item): array {
+
+    /* Activation of "Louer" and "Acheter" links on current page with get_queried_object */
+
+    if (is_singular('property') && function_exists('get_field')) {
+        $property = get_queried_object();
+        $category = get_field('property_category', $property);
+        if ($category === 'buy') {
+            $condition = agence_is_buy_url($item->url);
+        } else {
+            $condition = agence_is_rent_url($item->url);
+        }
+        if ($condition === true) {
+            $classes[] = 'current_page_parent';
+        }
+    }
+    return $classes;
+},11, 2);
+
+function agence_is_buy_url(string $url): bool {
+    return strpos($url, _x('property', 'URL', 'agence') . '/' . _x('buy', 'URL', 'agence')) !== false;
+}
+
+function agence_is_rent_url(string $url): bool {
+    return strpos($url, _x('property', 'URL', 'agence') . '/' . _x('rent', 'URL', 'agence')) !== false;
+}
