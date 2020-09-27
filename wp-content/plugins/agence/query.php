@@ -10,6 +10,10 @@ $propertiesCategories = [];
 // Filters the properties to buy or rent via the parameter property_category
 add_filter('query_vars', function (array $params): array {
     $params[] = 'property_category';
+    $params[] = 'city';
+    $params[] = 'price';
+    $params[] = 'property_type';
+    $params[] = 'rooms';
     return $params;
 });
 add_action('pre_get_posts', function (WP_Query $query) use (&$propertiesCategories): void {
@@ -22,6 +26,52 @@ add_action('pre_get_posts', function (WP_Query $query) use (&$propertiesCategori
         $meta_query[] = [
             'key' => 'property_category',
             'value' => $propertiesCategories[get_query_var('property_category')]
+        ];
+        $query->set('meta_query', $meta_query);
+    }
+
+    $city = get_query_var('city');
+    if ($city) {
+        $tax_query = $query->get('tax_query', []);
+        $tax_query[] = [
+            'taxonomy' => 'property_city',
+            'terms' => $city,
+            'field' => 'slug'
+        ];
+        $query->set('tax_query', $tax_query);
+    }
+
+    $price = (int)get_query_var('price');
+    if ($price) {
+        $meta_query = $query->get('meta_query', []);
+        $meta_query[] = [
+            'key' => 'price',
+            'value' => $price,
+            'compare' => '<=',
+            'type' => 'NUMERIC'
+        ];
+        $query->set('meta_query', $meta_query);
+    }
+
+    $type = get_query_var('property_type');
+    if ($type) {
+        $tax_query = $query->get('tax_query', []);
+        $tax_query[] = [
+            'taxonomy' => 'property_type',
+            'terms' => $type,
+            'field' => 'slug'
+        ];
+        $query->set('tax_query', $tax_query);
+    }
+
+    $rooms = (int)get_query_var('rooms');
+    if ($rooms) {
+        $meta_query = $query->get('meta_query', []);
+        $meta_query[] = [
+            'key' => 'rooms',
+            'value' => $rooms,
+            'compare' => '>=',
+            'type' => 'NUMERIC'
         ];
         $query->set('meta_query', $meta_query);
     }
@@ -44,7 +94,16 @@ add_action('init', function () use (&$propertiesCategories) {
 
 add_filter('nav_menu_css_class', function (array $classes, WP_Post $item): array {
 
-    /* Activation of "Louer" and "Acheter" links on current page with get_queried_object */
+    /* Retrieving the url of the parent page by global $ wp to activate the menu */
+
+    if (is_post_type_archive('property')) {
+        global $wp;
+        if ($wp->request === trim($item->url, '/')) {
+            $classes[] = 'current_page_parent';
+        }
+    }
+
+    /* Persistence of "Louer" and "Acheter" links on current page with get_queried_object */
 
     if (is_singular('property') && function_exists('get_field')) {
         $property = get_queried_object();
@@ -59,12 +118,14 @@ add_filter('nav_menu_css_class', function (array $classes, WP_Post $item): array
         }
     }
     return $classes;
-},11, 2);
+}, 11, 2);
 
-function agence_is_buy_url(string $url): bool {
+function agence_is_buy_url(string $url): bool
+{
     return strpos($url, _x('property', 'URL', 'agence') . '/' . _x('buy', 'URL', 'agence')) !== false;
 }
 
-function agence_is_rent_url(string $url): bool {
+function agence_is_rent_url(string $url): bool
+{
     return strpos($url, _x('property', 'URL', 'agence') . '/' . _x('rent', 'URL', 'agence')) !== false;
 }

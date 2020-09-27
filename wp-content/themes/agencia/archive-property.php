@@ -1,43 +1,71 @@
 <?php get_header()
 /* Property listing */
 ?>
+<?php
+$isRent = get_query_var('property_category', 'buy') === _x('rent', 'URL', 'agence');
+$cities = get_terms([
+    'taxonomy' => 'property_city'
+]);
+$types = get_terms([
+    'taxonomy' => 'property_type'
+]);
+
+$currentCity = get_query_var('city');
+$currentPrice = get_query_var('price');
+$currentType = get_query_var('property_type');
+$currentRooms = get_query_var('rooms');
+
+/* Récupération du nom de la ville sélectionnée pour affichage 
+$isTitle = get_term_by(
+    $field->slug,
+    $value->$currentCity,
+    $taxonomy->cities
+);
+
+*/
+
+?>
+
 
 <div class="container page-properties">
     <div class="search-form">
-        <h1 class="search-form__title">Agence immo Toulouse</h1>
-        <p>Retrouver tous nos biens sur le secteur de <strong>Toulouse</strong></p>
+        <h1 class="search-form__title">
+            <?= __('All our properties', 'agencia') ?>
+            <?php if ($isRent) : ?>
+                <?= __('for rent', 'agencia') ?>
+            <?php else : ?>
+                <?= __('on sale', 'agencia') ?>
+            <?php endif ?>
+        </h1>
+        <p><?= __('Find all our properties in the area of', 'agencia') ?><strong>Toulouse</strong></p>
         <hr>
-        <form action="listing.html" class="search-form__form">
-            <div class="search-form__checkbox">
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" checked="" type="radio" name="type" id="buy" value="buy">
-                    <label class="form-check-label" for="buy">Acheter</label>
-                </div>
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="type" id="rent" value="rent">
-                    <label class="form-check-label" for="rent">Louer</label>
-                </div>
-            </div>
+        <form action="" class="search-form__form">
             <div class="form-group">
-                <input type="text" class="form-control" id="city" placeholder="Montpellier">
-                <label for="city">Ville</label>
-            </div>
-            <div class="form-group">
-                <input type="number" class="form-control" id="budget" placeholder="100 000 €">
-                <label for="budget">Prix max</label>
-            </div>
-            <div class="form-group">
-                <select name="kind" id="kind" class="form-control">
-                    <option value="flat">Appartement</option>
-                    <option value="villa">Villa</option>
+                <select name="city" id="city" class="form-control">
+                    <?php foreach ($cities as $city) : ?>
+                        <option value="<?= $city->slug ?>" <?php selected($city->slug, $currentCity) ?>><?= $city->name ?></option>
+                    <?php endforeach; ?>
                 </select>
-                <label for="kind">Type</label>
+                <label for="city"><?= __('City', 'agencia') ?></label>
             </div>
             <div class="form-group">
-                <input type="number" class="form-control" id="rooms" placeholder="4">
-                <label for="rooms">Pièces</label>
+                <input type="number" class="form-control" id="budget" placeholder="100 000 €" name="price" value="<?= esc_attr($currentPrice) ?>">
+                <label for="budget"><?= __('Budget', 'agencia') ?></label>
             </div>
-            <button type="submit" class="btn btn-filled">Rechercher</button>
+            <div class="form-group">
+                <select name="property_type" id="property_type" class="form-control">
+                    <option value=""><?= __('All types', 'agencia') ?></option>
+                    <?php foreach ($types as $type) : ?>
+                        <option value="<?= $type->slug ?>" <?php selected($type->slug, $currentType) ?>><?= $type->name ?></option>
+                    <?php endforeach; ?>
+                </select>
+                <label for="property_type"><?= __('Type', 'agencia') ?></label>
+            </div>
+            <div class="form-group">
+                <input type="number" class="form-control" id="rooms" placeholder="4" name="rooms" value="<?= esc_attr($currentRooms) ?>">
+                <label for="rooms"><?= __('Pièces', 'agencia') ?></label>
+            </div>
+            <button type="submit" class="btn btn-filled"><?= __('Search', 'agencia') ?></button>
         </form>
     </div>
 
@@ -67,7 +95,7 @@
 
 <?php if (get_query_var('paged', 1) > 1) : ?>
     <?= agencia_paginate() ?>
-<?php elseif($nextPostLink = get_next_posts_link(__('More properties +', 'agencia'))) : ?>
+<?php elseif ($nextPostLink = get_next_posts_link(__('More properties +', 'agencia'))) : ?>
     <div class="pagination">
         <?= $nextPostLink ?>
     </div>
