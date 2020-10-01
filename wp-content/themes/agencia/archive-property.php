@@ -15,7 +15,7 @@ $currentPrice = get_query_var('price');
 $currentType = get_query_var('property_type');
 $currentRooms = get_query_var('rooms');
 
-/* Récupération du nom de la ville sélectionnée pour affichage 
+/* Test récupération du nom de la ville sélectionnée dans le filtre pour affichage dynamique
 $isTitle = get_term_by(
     $field->slug,
     $value->$currentCity,
@@ -75,19 +75,8 @@ $isTitle = get_term_by(
 
     <?php $i = 0;
     while (have_posts()) : the_post(); ?>
-        <a class="property <?php if ($i === 7) {
-                                echo 'property--large';
-                            } ?>" href="<?php the_permalink() ?>" title="<?= esc_attr(get_the_title()) ?>">
-            <div class="property__image">
-                <?php the_post_thumbnail($i === 7 ? 'property-thumbnail-large' : 'property-thumbnail') ?>
-            </div>
-            <div class="property__body">
-                <div class="property__location"><?php agence_city() ?>
-                </div>
-                <h3 class="property__title"><?php the_title() ?> - <?php the_field('surface') ?>m²</h3>
-                <div class="property__price"><?php agence_price() ?></div>
-            </div>
-        </a>
+        <?php set_query_var('property-large', $i === 7); ?>
+        <?php get_template_part('template-parts/property') ?>
     <?php $i++;
     endwhile; ?>
 

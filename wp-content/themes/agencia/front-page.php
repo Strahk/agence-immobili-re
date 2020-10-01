@@ -1,165 +1,137 @@
 <?php get_header(); ?>
 
+<?php while (have_posts()) : the_post() ?>
+
   <main class="sections">
     <!-- Find your home -->
     <section>
       <div class="container">
         <div class="search-form">
-  <h1 class="search-form__title">Agence immo Toulouse</h1>
-  <p>Retrouver tous nos biens sur le secteur de <strong>Montpellier</strong></p>
-  <hr>
-  <form action="listing.html" class="search-form__form">
-    <div class="search-form__checkbox">
-      <div class="form-check form-check-inline">
-        <input class="form-check-input" checked="" type="radio" name="type" id="buy" value="buy">
-        <label class="form-check-label" for="buy">Acheter</label>
-      </div>
-      <div class="form-check form-check-inline">
-        <input class="form-check-input" type="radio" name="type" id="rent" value="rent">
-        <label class="form-check-label" for="rent">Louer</label>
-      </div>
-    </div>
-    <div class="form-group">
-      <input type="text" class="form-control" id="city" placeholder="Montpellier">
-      <label for="city">Ville</label>
-    </div>
-    <div class="form-group">
-      <input type="number" class="form-control" id="budget" placeholder="100 000 €">
-      <label for="budget">Prix max</label>
-    </div>
-    <div class="form-group">
-      <select name="kind" id="kind" class="form-control">
-        <option value="flat">Appartement</option>
-        <option value="villa">Villa</option>
-      </select>
-      <label for="kind">Type</label>
-    </div>
-    <div class="form-group">
-      <input type="number" class="form-control" id="rooms" placeholder="4">
-      <label for="rooms">Pièces</label>
-    </div>
-    <button type="submit" class="btn btn-filled">Rechercher</button>
-  </form>
-</div>
+          <h1 class="search-form__title"><?php the_title() ?></h1>
+          <?php the_content() ?>
+          <hr>
+          <form action="listing.html" class="search-form__form">
+            <div class="search-form__checkbox">
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" checked="" type="radio" name="type" id="buy" value="buy">
+                <label class="form-check-label" for="buy">Acheter</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="type" id="rent" value="rent">
+                <label class="form-check-label" for="rent">Louer</label>
+              </div>
+            </div>
+            <div class="form-group">
+              <input type="text" class="form-control" id="city" placeholder="Montpellier">
+              <label for="city">Ville</label>
+            </div>
+            <div class="form-group">
+              <input type="number" class="form-control" id="budget" placeholder="100 000 €">
+              <label for="budget">Prix max</label>
+            </div>
+            <div class="form-group">
+              <select name="kind" id="kind" class="form-control">
+                <option value="flat">Appartement</option>
+                <option value="villa">Villa</option>
+              </select>
+              <label for="kind">Type</label>
+            </div>
+            <div class="form-group">
+              <input type="number" class="form-control" id="rooms" placeholder="4">
+              <label for="rooms">Pièces</label>
+            </div>
+            <button type="submit" class="btn btn-filled">Rechercher</button>
+          </form>
+        </div>
 
       </div>
-      <div class="highlighted highlighted--home">
-        <img src="/static/images/capitole.jpg" alt="vue gratte-ciel toulouse">
-        <div class="highlighted__body">
-          <div class="highlighted__title">Maison 4 pièce(s)</div>
-          <div class="highlighted__price">178 200€</div>
-          <div class="highlighted__location">34 000 MONTPELLIER</div>
-          <div class="highlighted__space">80m²</div>
+      <?php if ($property = get_field('highlighted_property')) : ?>
+        <div class="highlighted highlighted--home">
+          <?= get_the_post_thumbnail($property, 'property-thumbnail-home') ?>
+          <div class="highlighted__body">
+            <div class="highlighted__title"><a href="<?php the_permalink($property) ?>"><?= get_the_title($property) ?></a></div>
+            <div class="highlighted__price"><?php agence_price($property) ?></div>
+            <div class="highlighted__location"><?php agence_city($property) ?></div>
+            <div class="highlighted__space"><?php the_field('surface', $property) ?>m²</div>
+          </div>
         </div>
-      </div>
+      <?php endif ?>
     </section>
 
     <!-- Feature properties -->
-    <section class="container">
-      <div class="push-properties">
-        <div class="push-properties__title">Nos derniers biens</div>
-        <p>
-          Les agences Agencia présente sur Montpellier, Lattes et Palavas vous présentent leurs biens. Vous souhaitez louer ou acheter un appartement dans la zone de Montpellier, Pérols, Carnon ou leurs environ ?
-        </p>
-        <div class="push-properties__grid">
-          
-            <a class="property " href="single.html" title="Maison 4 pièce(s) - 00m²">
-  <div class="property__image">
-    
-      <img src="https://i.picsum.photos/id/30/385/220.jpg" alt="">
-    
-  </div>
-  <div class="property__body">
-    <div class="property__location">34000 Montpellier</div>
-    <h3 class="property__title">Maison 4 pièce(s) - 10m²</h3>
-    <div class="property__price">45 000 €</div>
-  </div>
-</a>
+    <?php if (have_rows('recent_properties')) : while (have_rows('recent_properties')) : the_row() ?>
+        <section class="container">
+          <div class="push-properties">
+            <div class="push-properties__title"><?php the_sub_field('title') ?></div>
+            <?php the_sub_field('description') ?>
+            <div class="push-properties__grid">
+              <?php
+              $query = [
+                'post_type' => 'property',
+                'posts_per_page' => 4
+              ];
 
-          
-            <a class="property " href="single.html" title="Maison 4 pièce(s) - 10m²">
-  <div class="property__image">
-    
-      <img src="https://i.picsum.photos/id/31/385/220.jpg" alt="">
-    
-  </div>
-  <div class="property__body">
-    <div class="property__location">34000 Montpellier</div>
-    <h3 class="property__title">Maison 4 pièce(s) - 20m²</h3>
-    <div class="property__price">45 000 €</div>
-  </div>
-</a>
+              /* Removal of the highlighted property from the listing of "Nos derniers biens" with post__not_in */
 
-          
-            <a class="property " href="single.html" title="Maison 4 pièce(s) - 20m²">
-  <div class="property__image">
-    
-      <img src="https://i.picsum.photos/id/32/385/220.jpg" alt="">
-    
-  </div>
-  <div class="property__body">
-    <div class="property__location">34000 Montpellier</div>
-    <h3 class="property__title">Maison 4 pièce(s) - 30m²</h3>
-    <div class="property__price">45 000 €</div>
-  </div>
-</a>
+              $property = get_sub_field('highlighted_property');
+              if ($property) {
+                $query['post__not_in'] = [$property->ID];
+              }
+              $query = new WP_Query($query);
+              while ($query->have_posts()) {
+                $query->the_post();
+                get_template_part('template-parts/property');
+              }
+              wp_reset_postdata();
+              ?>
 
-          
-            <a class="property " href="single.html" title="Maison 4 pièce(s) - 30m²">
-  <div class="property__image">
-    
-      <img src="https://i.picsum.photos/id/33/385/220.jpg" alt="">
-    
-  </div>
-  <div class="property__body">
-    <div class="property__location">34000 Montpellier</div>
-    <h3 class="property__title">Maison 4 pièce(s) - 40m²</h3>
-    <div class="property__price">45 000 €</div>
-  </div>
-</a>
+            </div>
 
-          
-        </div>
+            <?php if ($property) : ?>
 
-        <div class="highlighted">
-          <img src="https://i.picsum.photos/id/234/790/728.jpg" alt="">
-          <div class="highlighted__body">
-            <div class="highlighted__title">Maison 4 pièce(s)</div>
-            <div class="highlighted__price">178 200€</div>
-            <div class="highlighted__location">34 000 MONTPELLIER</div>
-            <div class="highlighted__space">80m²</div>
+              <div class="highlighted">
+                <?= get_the_post_thumbnail($property, 'property-thumbnail-home') ?>
+                <div class="highlighted__body">
+                  <div class="highlighted__title"><a href="<?php the_permalink($property) ?>"><?= get_the_title($property) ?></a></div>
+                  <div class="highlighted__price"><?php agence_price($property) ?></div>
+                  <div class="highlighted__location"><?php agence_city($property) ?></div>
+                  <div class="highlighted__space"><?php the_field('surface', $property) ?>m²</div>
+                </div>
+              </div>
+            <?php endif ?>
+
+            <a class="push-properties__action btn" href="<?= get_post_type_archive_link('property') ?>">
+              <?= __('Browser our properties', 'agencia') ?>
+              <?= agencia_icon('arrow'); ?>
+            </a>
+
           </div>
-        </div>
+        </section>
+    <?php endwhile;
+    endif ?>
 
-        <a class="push-properties__action btn" href="#">
-          Parcourir nos biens
-          <svg class="icon">
-            <use xlink:href="sprite.14d9fd56.svg#arrow"></use>
-          </svg>
-        </a>
+    <?php if (have_rows('quote')) : while (have_rows('quote')) : the_row() ?>
+        <section class="container quote">
+          <div class="quote__title"><?php the_sub_field('title') ?></div>
+          <div class="quote__body">
+            <div class="quote__image">             
+              <img src="<?php the_sub_field('avatar') ?>" alt="">
+              <div class="quote__author"><?php the_sub_field('job') ?></div>
+            </div>
+            <blockquote>
+              <?php the_sub_field('content') ?>
+            </blockquote>
+          </div>
 
-      </div>
-    </section>
-
-    <section class="container quote">
-      <div class="quote__title">Ce que pensent nos clients</div>
-      <div class="quote__body">
-        <div class="quote__image">
-          <img src="quote-man.5c402ea9.png" alt="">
-          <div class="quote__author">Stephane, Agent immobilier</div>
-        </div>
-        <blockquote>
-          <p>J'ai voulu vendre mon bien et j'ai été très bien conseillé, des agents très professionnels et investis.</p>
-        </blockquote>
-      </div>
-
-      <a class="quote__action btn" href="#">
-        Estimer mon bien
-        <svg class="icon">
-          <use xlink:href="sprite.14d9fd56.svg#arrow"></use>
-        </svg>
-      </a>
-    </section>
+          <?php if($action = get_sub_field('action')): ?>
+          <a class="quote__action btn" href="<?= $action['url'] ?>">
+            <?= $action['title']; ?>
+            <?= agencia_icon('arrow') ?>
+          </a>
+          <?php endif ?>
+        </section>
+    <?php endwhile;
+    endif ?>
 
     <!-- Read our stories -->
     <section class="container push-news">
@@ -234,5 +206,7 @@
     </section>
 
   </main>
+
+<?php endwhile; ?>
 
 <?php get_footer(); ?>

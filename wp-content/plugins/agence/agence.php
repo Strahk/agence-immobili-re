@@ -154,8 +154,8 @@ function agence_city($post = null): void
 function agence_price($post = null): void
 {
     if (get_field('property_category', $post) === 'buy') {
-        echo sprintf(__('%s $', 'agence'), get_field('price'));
+        echo sprintf(__('%s $', 'agence'), number_format_i18n(get_field('price', $post)));
     } else {
-        echo sprintf(__('%s $/mo', 'agence'), get_field('price'));
+        echo sprintf(__('%s $/mo', 'agence'), number_format_i18n(get_field('price', $post)));
     }
 };
