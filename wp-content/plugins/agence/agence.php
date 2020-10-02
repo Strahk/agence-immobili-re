@@ -44,7 +44,7 @@ add_action('init', function () {
         'has_archive' => true,
         'public' => true,
         'hierarchical' => false,
-        'exclude_from_search' => false,
+        'exclude_from_search' => true,
         'rewrite' => [
             'slug' => _x('property', 'URL', 'agence')
         ],
@@ -159,3 +159,11 @@ function agence_price($post = null): void
         echo sprintf(__('%s $/mo', 'agence'), number_format_i18n(get_field('price', $post)));
     }
 };
+
+function agence_rent_route_name () {
+    return _x('rent', 'URL', 'agence');
+}
+
+function agence_buy_route_name () {
+    return _x('buy', 'URL', 'agence');
+}
