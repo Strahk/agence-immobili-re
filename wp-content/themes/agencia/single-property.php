@@ -12,34 +12,26 @@
                         <?php agence_price() ?>
                     </div>
                 </div>
-                <div class="bien__actions">
-                    <button class="btn btn-filled">Contacter l'agence</button>
+                <div class="bien__actions" id="bien-actions">
+                    <button class="btn btn-filled" id="bien-contact">Contacter l'agence</button>
                     <button class="btn">Appeler</button>
                 </div>
 
-                <!--
-        <form action="" class="bien__form form-2column">
-          <div class="form-group">
-            <input type="text" id="username" class="form-control">
-            <label for="username">Pseudo</label>
-          </div>
-          <div class="form-group">
-            <input type="text" id="email" class="form-control">
-            <label for="email">Email</label>
-          </div>
-          <textarea placeholder="Message" class="form-control full"></textarea>
-          <button type="submit" class="btn">Commenter</button>
-        </form>
-        -->
+                <div class="hidden" id="bien-form">
 
+                    <?php /* Insertion of the contact form for the "Contact form 7" extension */ ?>
+
+                    <?= do_shortcode('[contact-form-7 id="123" title="" html_class="bien__form form-2column"]'); ?>
+                </div>
+            
             </div>
             <div>
                 <div class="bien__photos js-slider">
-                    <?php foreach(get_attached_media('image', get_post()) as $image): ?>
+                    <?php foreach (get_attached_media('image', get_post()) as $image) : ?>
 
-                    <a href="<?= wp_get_attachment_image_url($image->ID) ?>">
-                        <img class="bien__photo" src="<?= wp_get_attachment_image_url($image->ID, 'property-carousel'); ?>" alt="">
-                    </a>
+                        <a href="<?= wp_get_attachment_url($image->ID) ?>">
+                            <img class="bien__photo" src="<?= wp_get_attachment_image_url($image->ID, 'property-carousel'); ?>" alt="">
+                        </a>
                     <?php endforeach ?>
                 </div>
             </div>
@@ -86,11 +78,11 @@
                 <?= __('Floor', 'agencia') ?>: <?php the_field('floor') ?>
             </div>
             <?php $options = get_the_terms(get_post(), 'property_option'); ?>
-            <?php foreach($options as $option): ?>
-            <div class="bien-option">
-                <img src="<?= the_field('icon', $option); ?>" alt="">
-                <?= $option->name; ?>
-            </div>
+            <?php foreach ($options as $option) : ?>
+                <div class="bien-option">
+                    <img src="<?= the_field('icon', $option); ?>" alt="">
+                    <?= $option->name; ?>
+                </div>
             <?php endforeach; ?>
         </section>
 

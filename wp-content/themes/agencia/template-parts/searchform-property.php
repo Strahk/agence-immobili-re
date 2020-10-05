@@ -18,11 +18,11 @@ $currentRooms = get_query_var('rooms');
 <?php if(is_front_page()): ?>
     <div class="search-form__checkbox">
         <div class="form-check form-check-inline">
-            <input class="form-check-input" <?php checked(!$isRent) ?> type="radio" name="property_category" id="buy" value="<?= _x('buy', 'URL', 'agence') ?>">
+            <input class="form-check-input" type="radio" name="property_category" id="buy" value="<?= _x('buy', 'URL', 'agence') ?>">
             <label class="form-check-label" for="<?= _x('buy', 'URL', 'agence') ?>"><?= __('Buy', 'agence') ?></label>
         </div>
         <div class="form-check form-check-inline">
-            <input class="form-check-input" <?php checked(!$isRent) ?> type="radio" name="property_category" id="<?= _x('rent', 'URL', 'agence') ?>" value="<?= _x('rent', 'URL', 'agence') ?>">
+            <input class="form-check-input" checked="" type="radio" name="property_category" id="<?= _x('rent', 'URL', 'agence') ?>" value="<?= _x('rent', 'URL', 'agence') ?>">
             <label class="form-check-label" for="<?= _x('rent', 'URL', 'agence') ?>"><?= __('Rent', 'agence') ?></label>
         </div>
     </div>
