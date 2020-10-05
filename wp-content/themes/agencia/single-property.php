@@ -44,23 +44,6 @@
             <h2 class="bien-body__title"><?= __('Description', 'agencia'); ?></h2>
             <div class="formatted">
                 <?php the_content(); ?>
-                <p>
-                    <strong>EXCLUSIVITÉ - LOCATION AVRILLE. GRAND APPARTEMENT 4 PIÈCES de 90,23 m²</strong> en résidence récente
-                    avec ascenseur. Il propose un séjour de 23 m² avec balcon de 10 m², une belle cuisine américaine aménagée et
-                    équipée
-                    ( plaques vitrocéramiques et hotte), trois chambres, une salle d'eau et une salle de bain. Parking privé en
-                    sous-sol.
-                </p>
-
-                <p>
-                    Le bien se trouve à proximité des commerces. On trouve des écoles maternelles et élémentaires à 2 minutes de
-                    l'appartement .
-                </p>
-
-                <p>
-                    Le loyer de <strong>838,00 euros</strong> par mois charges comprises dont 113,00 euros par mois de provision
-                    pour charges (soumis à la régularisation annuelle).
-                </p>
             </div>
         </div>
 
