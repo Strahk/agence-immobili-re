@@ -1,4 +1,6 @@
 <?php 
+/* No result by typing the url of the file */
+
 defined('ABSPATH') or die('');
 
 add_action('after_setup_theme', function () {
